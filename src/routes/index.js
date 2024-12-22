@@ -25,15 +25,29 @@ router.delete('/eliminarreserva/:id', usuarioPhpController.eliminarreserva);
 //Administrador
 router.post('/crearpaquete', adminPhpController.crearpaquete);
 router.get('/verpaquetes', adminPhpController.verpaquetes);
-
 router.put('/administradoractualizarpaquete/:id', adminPhpController.administradoractualizarpaquete);
 
-router.delete('/eliminarpaquete/:id', adminPhpController.eliminarpaquete);
+router.put('/estadousuarioactivar/:cont/:estado', adminPhpController.estadoreservas);
 
-router.get('/leerusuariosAll', adminPhpController.leerusuariosAll);
+
+
+
+
+router.delete('/eliminarpaquete/:id', adminPhpController.eliminarpaquete);
+router.get('/listausuarioall', adminPhpController.leerusuariosAll);
+
+router.get('/listareservasall', adminPhpController.listareservasall);
+
+
+
+router.put('/estadousuariobloquear/:id', adminPhpController.estadousuariobloquear);
+router.put('/estadousuarioactivar/:id', adminPhpController.estadousuarioactivar);
+
+
+
+
 router.get('/leerusuarios', adminPhpController.leerusuarios);
 router.get('/verreservaAll', adminPhpController.verreservaAll);
-
 router.delete('/eliminarusuario/:id', adminPhpController.eliminarusuario);
 
 

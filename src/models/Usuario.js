@@ -72,8 +72,8 @@ module.exports = async (sequelize) => {
       const defaultUsers = [
         {
           tdocumento: 'Cedula',
-          idusuario: 'user1',
-          imagen: 'https://res.cloudinary.com/dss2hdisa/image/upload/9e46d2905d70d779a552ff036d5e5b1e_leirjn.jpg',
+          idusuario: '123456789',
+          imagen: 'https://res.cloudinary.com/dss2hdisa/image/upload/Super_Mario_Maker_for_Nintendo_3DS__JP_website_open_footage_commercials_more_xrnxvc.jpg',
           nombre: 'Admin',
           papellido: 'Perez',
           sapellido: 'Garcia',
@@ -84,7 +84,7 @@ module.exports = async (sequelize) => {
         },
         {
           tdocumento: 'Pasaporte',
-          idusuario: 'user2',
+          idusuario: '1234567890',
           imagen: 'https://res.cloudinary.com/dss2hdisa/image/upload/9e46d2905d70d779a552ff036d5e5b1e_leirjn.jpg',
           nombre: 'User',
           papellido: 'Lopez',
@@ -96,15 +96,15 @@ module.exports = async (sequelize) => {
         },
         {
           tdocumento: 'DNI',
-          idusuario: 'user3',
-          imagen: 'https://res.cloudinary.com/dss2hdisa/image/upload/9e46d2905d70d779a552ff036d5e5b1e_leirjn.jpg',
+          idusuario: '103698741',
+          imagen: 'https://res.cloudinary.com/dss2hdisa/image/upload/png-clipart-new-super-mario-bros-2-bowser-mario-heroes-super-mario-bros_zrdq18.png',
           nombre: 'Manager',
           papellido: 'Rodriguez',
           sapellido: 'Torres',
           celular: '1231231234',
           email: 'geminis@gmail.com',
           passwords: passwordHash,
-          role_id: '3',
+          role_id: '0',
         },
       ];
 

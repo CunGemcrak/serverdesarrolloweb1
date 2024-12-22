@@ -69,21 +69,27 @@ const adminPhpController = {
     }
   },
 
-  // Leer todos los usuarios
-  leerusuariosAll: async (req, res) => {
-    try {
-      const response = await axios.get(`${phpBaseUrl}?action=leerusuariosAll`);
+// Leer todos los usuarios
+leerusuariosAll: async (req, res) => {
+  try {
+    console.log('Entro al leerallUser'); // Cambiado alert por console.log
+  
+    const response = await axios.get(`${phpBaseUrl}?action=leerusuariosAll`);
 
-      if (!response.data || response.data.length === 0) {
-        return res.status(404).json({ message: 'No se encontraron usuarios.' });
-      }
-
-      res.status(response.status).json(response.data);
-    } catch (error) {
-      console.error('Error al obtener los usuarios:', error.message);
-      res.status(500).json({ message: 'Error al obtener los usuarios.', error });
+    if (!response.data || response.data.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron usuarios.' });
     }
-  },
+
+    // Responder con los datos obtenidos
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error('Error al obtener los usuarios:', error.message);
+    res.status(500).json({
+      message: 'Error al obtener los usuarios.',
+      error: error.message,
+    });
+  }
+},
 
   // Leer un usuario específico (por query)
   leerusuarios: async (req, res) => {
@@ -259,12 +265,95 @@ const adminPhpController = {
 
 
 
+  estadousuariobloquear: async (req, res) => {
+    try {
+      const { id } = req.params; // Obtener el ID del paquete desde los parámetros de la URL
+  
+      // Validar que todos los campos necesarios estén presentes
+      if (!id ) {
+        return res.status(400).json({ message: 'Faltan datos obligatorios para actualizar el paquete.' });
+      }
+  
+      // Enviar la solicitud PUT al servidor PHP para actualizar el paquete
+      const response = await axios.put(
+        `${phpBaseUrl}?action=bloquearusuario&id=${id}`,
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+  
+      // Enviar la respuesta del servidor PHP de vuelta al cliente
+      res.status(response.status).json(response.data);
+    } catch (error) {
+      console.error('Error al actualizar el paquete:', error.message);
+      res.status(500).json({ message: 'Error al actualizar el paquete.', error });
+    }
+  },
 
+  estadousuarioactivar: async (req, res) => {
+    try {
+      const { id } = req.params; // Obtener el ID del paquete desde los parámetros de la URL
+  
+      // Validar que todos los campos necesarios estén presentes
+      if (!id ) {
+        return res.status(400).json({ message: 'Faltan datos obligatorios para actualizar el paquete.' });
+      }
+  
+      // Enviar la solicitud PUT al servidor PHP para actualizar el paquete
+      const response = await axios.put(
+        `${phpBaseUrl}?action=activarusuario&id=${id}`,
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+  
+      // Enviar la respuesta del servidor PHP de vuelta al cliente
+      res.status(response.status).json(response.data);
+    } catch (error) {
+      console.error('Error al actualizar el paquete:', error.message);
+      res.status(500).json({ message: 'Error al actualizar el paquete.', error });
+    }
+  },
 
+  listareservasall: async (req, res) => {
+    try {
+      const response = await axios.get(`${phpBaseUrl}?action=listareservasall`);
 
+      if (!response.data || response.data.length === 0) {
+        return res.status(404).json({ message: 'No se encontraron reservas.' });
+      }
 
-
-
+      res.status(response.status).json(response.data);
+    } catch (error) {
+      console.error('Error al obtener las reservas:', error.message);
+      res.status(500).json({ message: 'Error al obtener las reservas.', error });
+    }
+  },
+  estadoreservas: async (req, res) => {
+    try {
+      const { cont, estado } = req.params; // Obtener los parámetros de la URL
+  
+      // Validar que todos los campos necesarios estén presentes
+      if (!cont || !estado) {
+        return res.status(400).json({ message: 'Faltan datos obligatorios para actualizar la reserva.' });
+      }
+  
+      // Construir correctamente el endpoint para el servidor PHP
+      const endpointPHP = `${phpBaseUrl}?action=adminactivarreservas&id=${cont}&estado=${estado}`;
+  
+      // Enviar la solicitud al servidor PHP
+      const response = await axios.put(endpointPHP, {}, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+  
+      // Enviar la respuesta del servidor PHP de vuelta al cliente
+      res.status(response.status).json(response.data);
+    } catch (error) {
+      console.error('Error al actualizar la reserva:', error.message);
+  
+      // Manejar el error y enviar una respuesta al cliente
+      res.status(500).json({
+        message: 'Error al actualizar la reserva.',
+        error: error.message,
+      });
+    }
+  }, 
 
 };
 
